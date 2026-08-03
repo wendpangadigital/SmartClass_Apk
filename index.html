@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartClass — Télécharger l'application</title>
+<meta name="description" content="Téléchargez SmartClass, l'application de gestion de classe, en attendant sa publication officielle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════
+   CONFIG — à modifier par l'utilisateur
+   ══════════════════════════════════════════════════ */
+:root{
+  --chalkboard:#16281F;
+  --chalkboard-2:#1F3A2E;
+  --chalkboard-3:#2A4A3A;
+  --paper:#FBF7EC;
+  --paper-2:#F3EDDA;
+  --paper-line:#DFD5B4;
+  --ink:#2B3A67;
+  --ink-soft:#4C5A85;
+  --stamp:#A6321B;
+  --stamp-dark:#7E2513;
+  --gold:#C9A227;
+  --chalk:#F5F3E7;
+  --chalk-soft:#CBD6C9;
+  --radius:14px;
+  --maxw:1080px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--chalkboard);
+  color:var(--chalk);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  letter-spacing:-0.01em;
+  margin:0;
+}
+a{color:inherit;}
+img,svg{display:block;max-width:100%;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+}
+
+/* ── skip link / focus ───────────────────────────── */
+.skip-link{
+  position:absolute;left:-999px;top:0;
+  background:var(--gold);color:var(--chalkboard);
+  padding:10px 16px;border-radius:0 0 8px 0;z-index:100;font-weight:600;
+}
+.skip-link:focus{left:0;}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+
+/* ── layout helpers ──────────────────────────────── */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--chalk-soft);
+}
+
+/* ══════════════════════════════════════════════════
+   HEADER
+   ══════════════════════════════════════════════════ */
+header{
+  padding:22px 0;
+  border-bottom:1px solid rgba(245,243,231,.1);
+}
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--chalk);}
+.brand-mark{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(155deg,var(--chalk) 0%,var(--chalk-soft) 100%);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--chalkboard);font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;
+  flex:none;
+}
+.header-tag{font-size:13px;color:var(--chalk-soft);font-family:'IBM Plex Mono',monospace;}
+
+/* ══════════════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════════════ */
+.hero{
+  padding:64px 0 72px;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,162,39,.10), transparent 60%),
+    var(--chalkboard);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  /* faint chalk dust / ruled texture */
+  content:"";
+  position:absolute;inset:0;
+  background-image:repeating-linear-gradient(180deg, rgba(245,243,231,.035) 0px, rgba(245,243,231,.035) 1px, transparent 1px, transparent 34px);
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:44px;
+  align-items:center;
+}
+.hero h1{
+  font-size:clamp(32px,5.4vw,52px);
+  line-height:1.08;
+  color:var(--chalk);
+}
+.hero h1 em{
+  font-style:normal;color:var(--gold);
+}
+.hero p.lead{
+  margin-top:18px;
+  font-size:17px;
+  color:var(--chalk-soft);
+  max-width:46ch;
+}
+.hero .eyebrow{margin-bottom:14px;display:inline-block;}
+
+.hero-actions{
+  margin-top:32px;
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 26px;
+  border-radius:10px;
+  font-weight:600;font-size:15.5px;
+  text-decoration:none;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{
+  background:var(--stamp);color:var(--chalk);
+  box-shadow:0 10px 24px -8px rgba(166,50,27,.55);
+}
+.btn-primary:hover{background:var(--stamp-dark);}
+.btn-ghost{
+  background:transparent;color:var(--chalk);
+  border-color:rgba(245,243,231,.28);
+}
+.btn-ghost:hover{border-color:rgba(245,243,231,.6);}
+.btn svg{flex:none;}
+
+.hero-meta{
+  margin-top:16px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  color:var(--chalk-soft);
+  display:flex;flex-wrap:wrap;gap:6px 18px;
+}
+.hero-meta b{color:var(--chalk);font-weight:600;}
+
+/* ── stamp signature element ─────────────────────── */
+.stamp-wrap{
+  position:relative;
+  justify-self:center;
+  width:min(78vw,300px);
+}
+.stamp{
+  width:100%;aspect-ratio:1/1;
+  position:relative;
+  animation:stampIn .7s cubic-bezier(.2,.9,.25,1) both;
+}
+@keyframes stampIn{
+  from{opacity:0;transform:rotate(-16deg) scale(.85);}
+  to{opacity:1;transform:rotate(-9deg) scale(1);}
+}
+.stamp svg{width:100%;height:100%;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35));}
+
+/* ══════════════════════════════════════════════════
+   PAPER SECTIONS (download card, install steps)
+   ══════════════════════════════════════════════════ */
+.paper-section{
+  background:var(--paper);
+  color:var(--ink);
+  padding:64px 0 72px;
+}
+.section-head{max-width:60ch;margin-bottom:34px;}
+.section-head .eyebrow{color:var(--stamp);}
+.section-head h2{
+  font-size:clamp(24px,3.4vw,32px);
+  color:var(--ink);
+  margin-top:10px;
+}
+.section-head p{color:var(--ink-soft);margin-top:10px;font-size:15.5px;}
+
+/* download ledger card */
+.dl-card{
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius);
+  padding:30px 28px;
+  box-shadow:0 1px 0 var(--paper-line), 0 16px 40px -24px rgba(43,58,103,.25);
+}
+.ledger-row{
+  display:flex;align-items:baseline;gap:10px;
+  padding:11px 0;
+  border-bottom:1px dashed var(--paper-line);
+  font-size:14.5px;
+}
+.ledger-row:last-of-type{border-bottom:none;}
+.ledger-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-soft);
+  flex:none;white-space:nowrap;
+}
+.ledger-fill{
+  flex:1;
+  border-bottom:1px dotted var(--paper-line);
+  transform:translateY(-4px);
+}
+.ledger-value{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:600;color:var(--ink);
+  flex:none;
+}
+.dl-card .btn-primary{width:100%;justify-content:center;margin-top:22px;}
+.ios-card{margin-top:22px;}
+.ios-card h3{margin-top:0;}
+.dl-note{
+  margin-top:14px;font-size:13px;color:var(--ink-soft);
+  display:flex;gap:8px;align-items:flex-start;
+}
+.dl-note svg{flex:none;margin-top:2px;}
+
+/* install steps — real sequence, numbered */
+.steps{
+  margin-top:52px;
+  display:grid;grid-template-columns:1fr;gap:0;
+}
+.step{
+  display:grid;grid-template-columns:auto 1fr;gap:18px;
+  padding:22px 0;
+  border-bottom:1px solid var(--paper-line);
+}
+.step:last-child{border-bottom:none;}
+.step-num{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--chalkboard-2);color:var(--chalk);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;
+  flex:none;
+}
+.step h3{font-size:16.5px;color:var(--ink);margin-bottom:4px;}
+.step p{margin:0;color:var(--ink-soft);font-size:14.5px;}
+
+/* trust callout */
+.trust{
+  margin-top:46px;
+  background:var(--paper-2);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius);
+  padding:22px 24px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.trust svg{flex:none;margin-top:2px;color:var(--stamp);}
+.trust h3{font-size:15px;color:var(--ink);margin-bottom:5px;}
+.trust p{margin:0;color:var(--ink-soft);font-size:14px;}
+
+/* ══════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════ */
+footer{
+  background:var(--chalkboard);
+  padding:32px 0;
+  border-top:1px solid rgba(245,243,231,.1);
+}
+.footer-row{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  font-size:13px;color:var(--chalk-soft);
+}
+.footer-row .brand{font-size:15px;}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════ */
+@media (min-width:760px){
+  .ledger-row{font-size:15px;}
+}
+@media (min-width:900px){
+  .hero-grid{
+    grid-template-columns:1.15fr .85fr;
+    gap:40px;
+  }
+  .stamp-wrap{justify-self:end;width:min(26vw,320px);}
+  .steps{grid-template-columns:1fr 1fr;column-gap:40px;}
+  .step{border-bottom:1px solid var(--paper-line);}
+  .step:nth-last-child(2){border-bottom:none;}
+}
+@media (min-width:1200px){
+  .hero{padding:88px 0 96px;}
+  .paper-section{padding:84px 0 92px;}
+}
+</style>
+</head>
+<body>
+
+<a href="#telecharger" class="skip-link">Aller au téléchargement</a>
+
+<header>
+  <div class="wrap header-row">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">SC</span>
+      SmartClass
+    </div>
+    <span class="header-tag">Gestion de classe</span>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Application Android · Téléchargement direct</span>
+        <h1>Le registre numérique<br>de votre <em>classe</em>.</h1>
+        <p class="lead">Bulletins, Compositions, certificats de scolarité, Tableau synoptique, Carte scolaire et documents administratifs, Évaluation mensuelle; Examen blanc; Bilan annuel, Registre d'appel journalier...et bien d'autres générés et signés directement depuis votre téléphone ou votre tablette de façon automatique.</p>
+
+        <div class="hero-actions">
+          <a href="#telecharger" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Télécharger l'APK
+          </a>
+          <a href="#installation" class="btn btn-ghost" id="howToInstallBtn">Comment l'installer ?</a>
+        </div>
+
+        <div class="hero-meta">
+          <span><b id="metaVersion">v1.0.0</b></span>
+          <span>·</span>
+          <span id="metaSize">— Mo</span>
+          <span>·</span>
+          <span>Mise à jour le <span id="metaDate">—</span></span>
+        </div>
+      </div>
+
+      <div class="stamp-wrap" aria-hidden="true">
+        <div class="stamp">
+          <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="ringPath" d="M 120,120 m -95,0 a 95,95 0 1,1 190,0 a 95,95 0 1,1 -190,0" />
+            </defs>
+            <circle cx="120" cy="120" r="112" fill="none" stroke="#A6321B" stroke-width="2" opacity="0.55"/>
+            <circle cx="120" cy="120" r="95" fill="none" stroke="#A6321B" stroke-width="3"/>
+            <circle cx="120" cy="120" r="70" fill="none" stroke="#A6321B" stroke-width="1.4" opacity="0.7"/>
+            <text font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#A6321B" letter-spacing="3">
+              <textPath href="#ringPath" startOffset="2%">SMARTCLASS · GESTION DE CLASSE · TÉLÉCHARGEMENT DIRECT ·</textPath>
+            </text>
+            <g transform="translate(120,120)">
+              <path d="M-30,-6 L-8,18 L34,-26" fill="none" stroke="#A6321B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ TÉLÉCHARGEMENT ══════════ -->
+  <section class="paper-section" id="telecharger">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Téléchargement</span>
+        <h2>Fiche du fichier</h2>
+        <p>En attendant la publication officielle, l'application se télécharge directement sous forme de fichier APK.</p>
+      </div>
+
+      <div id="androidBlock">
+      <div class="dl-card">
+        <div class="ledger-row">
+          <span class="ledger-label">Application</span>
+          <span class="ledger-fill"></span>
+          <span class="ledger-value">SmartClass</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-label">Version</span>
+          <span class="ledger-fill"></span>
+          <span class="ledger-value" id="rowVersion">1.0.0</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-label">Taille</span>
+          <span class="ledger-fill"></span>
+          <span class="ledger-value" id="rowSize">— Mo</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-label">Mise à jour</span>
+          <span class="ledger-fill"></span>
+          <span class="ledger-value" id="rowDate">—</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-label">Compatibilité</span>
+          <span class="ledger-fill"></span>
+          <span class="ledger-value">Android 8.0+</span>
+        </div>
+
+        <a href="#" id="downloadLink" class="btn btn-primary" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Télécharger le fichier .apk
+        </a>
+
+        <div class="dl-note">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Le fichier se télécharge directement, sans passer par un magasin d'applications.
+        </div>
+      </div>
+
+      <!-- ══════════ INSTALLATION ══════════ -->
+      <div id="installation" style="margin-top:60px;">
+        <div class="section-head">
+          <span class="eyebrow">Installation</span>
+          <h2>Les 4 étapes, dans l'ordre</h2>
+          <p>Android bloque par défaut l'installation d'applications venant d'ailleurs que son magasin habituel. C'est normal : ces étapes débloquent l'installation pour ce fichier précis.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <div>
+              <h3>Autoriser la source</h3>
+              <p>Au moment d'ouvrir le fichier, le téléphone proposera d'autoriser l'installation depuis cette source. Accepter cette autorisation.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <div>
+              <h3>Télécharger le fichier</h3>
+              <p>Appuyer sur « Télécharger le fichier .apk » ci-dessus et attendre la fin du téléchargement.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <div>
+              <h3>Ouvrir le fichier</h3>
+              <p>Depuis les notifications ou le dossier Téléchargements, ouvrir le fichier <span class="mono">.apk</span> reçu.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">4</span>
+            <div>
+              <h3>Confirmer l'installation</h3>
+              <p>Appuyer sur « Installer », puis « Ouvrir » une fois l'installation terminée. SmartClass est prêt.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.5 8.5 9 10 5.5-1.5 9-5 9-10V6z"/></svg>
+          <div>
+            <h3>L'avertissement « source inconnue » est normal</h3>
+            <p>Il apparaît pour toute application installée hors d'un magasin officiel, pas seulement celle-ci. Il disparaîtra une fois l'application publiée officiellement.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- ══════════ CARTE iOS (affichée uniquement sur iPhone/iPad) ══════════ -->
+      <div class="dl-card ios-card" id="iosBlock" hidden>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A6321B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+          <div>
+            <h3 style="font-family:'Fraunces',serif;font-size:18px;color:var(--ink);margin-bottom:6px;">Version iPhone bientôt disponible</h3>
+            <p style="margin:0;color:var(--ink-soft);font-size:14.5px;">Ce fichier est conçu pour Android et ne s'installe pas sur iPhone ou iPad. La version iOS de SmartClass arrive sur l'App Store.</p>
+          </div>
+        </div>
+        <div class="dl-note" style="margin-top:18px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Vous consultez cette page depuis un iPhone ou un iPad. Pour installer sur un téléphone Android, ouvrez ce lien depuis cet appareil.
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span class="brand mono">SmartClass</span>
+    <span>En cours de déploiement sur Play Store et App Store.</span>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════
+   À REMPLIR : renseigner ces 4 valeurs, tout le reste
+   de la page se met à jour automatiquement.
+   ══════════════════════════════════════════════════ */
+const APK_CONFIG = {
+  url:     "https://github.com/wendpangadigital/SmartClass_Apk/releases/download/v1.0.0/SmartClass.apk",
+  version: "1.0.0",
+  taille:  "5,4 Mo",
+  date:    "2 août 2026"
+};
+
+document.getElementById('downloadLink').href = APK_CONFIG.url;
+document.getElementById('metaVersion').textContent = 'v' + APK_CONFIG.version;
+document.getElementById('metaSize').textContent = APK_CONFIG.taille;
+document.getElementById('metaDate').textContent = APK_CONFIG.date;
+document.getElementById('rowVersion').textContent = APK_CONFIG.version;
+document.getElementById('rowSize').textContent = APK_CONFIG.taille;
+document.getElementById('rowDate').textContent = APK_CONFIG.date;
+
+/* ── Détection iPhone / iPad : le fichier .apk ne s'installe pas sur iOS,
+     on affiche donc la carte "Version iPhone bientôt disponible" à la place
+     de la fiche de téléchargement + des étapes d'installation Android. ── */
+function isIOS(){
+  const ua = navigator.userAgent || "";
+  const iOSClassic = /iPhone|iPad|iPod/.test(ua);
+  // iPadOS 13+ se déclare comme "MacIntel" mais garde le multi-touch
+  const iPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  return iOSClassic || iPadOS;
+}
+if (isIOS()) {
+  document.getElementById('androidBlock').hidden = true;
+  document.getElementById('iosBlock').hidden = false;
+  document.getElementById('howToInstallBtn').hidden = true;
+}
+</script>
+
+</body>
+</html>
