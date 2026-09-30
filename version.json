@@ -2,6 +2,6 @@
   "versionCode": 3,
   "versionName": "1.3",
   "apkUrl": "https://wendpangadigital.github.io/SmartClass_Apk/",
-  "changelog": "- Nouvelle icône de l'application\n- Alertes automatiques de mise à jour",
-  "minVersionCode": 1
+  "changelog": "- Nouvelle version de l'application\n- Alertes de mise à jour",
+  "minVersionCode": 2
 }
